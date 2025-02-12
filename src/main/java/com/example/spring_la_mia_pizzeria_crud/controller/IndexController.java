@@ -22,8 +22,14 @@ public class IndexController {
 
     @GetMapping("/")
     public String getMethodName(Model model) {
-
-        model.addAttribute("pizzas", pizzaService.getAllPizzas());
+        if (pizzaService.getAllPizzas().size() == 0) {
+            model.addAttribute("pizzas", pizzaService.getAllPizzas());
+            model.addAttribute("isValid", "false");
+        } else {
+            model.addAttribute("pizzas", pizzaService.getAllPizzas());
+            model.addAttribute("isValid", "true");
+        }
+        ;
         return "index";
     }
 

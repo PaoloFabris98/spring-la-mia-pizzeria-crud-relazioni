@@ -20,11 +20,14 @@
                         </div>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li th:each="pizza : ${pizzas}" class="list-group-item">
+                        <li th:if="${isValid == 'true'}" th:each="pizza : ${pizzas}" class="list-group-item">
                             <p th:text="${pizza.getNome()}"></p>
                             <p th:text="${pizza.getFoto()}"></p>                            
                             <p th:text="${pizza.getDescrizione()}"></p>
                             <p th:text="${pizza.getPrezzo()}"></p>
+                        </li>
+                        <li th:if="${isValid == 'false'}" class="list-group-item">
+                            <p>Purtroppo non ci sono pizze disponibili.</p>
                         </li>
                     </ul>
                 </div>
