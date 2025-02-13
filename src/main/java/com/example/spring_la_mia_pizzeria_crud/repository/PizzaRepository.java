@@ -7,10 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.example.spring_la_mia_pizzeria_crud.java.database_controller.*;
+import com.example.spring_la_mia_pizzeria_crud.model.Pizza;
 
 @Repository
 public interface PizzaRepository extends JpaRepository<Pizza, Integer> {
     ArrayList<Pizza> findById(int id);
-
 }

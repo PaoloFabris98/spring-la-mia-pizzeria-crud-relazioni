@@ -1,4 +1,4 @@
-package com.example.spring_la_mia_pizzeria_crud.java.database_controller;
+package com.example.spring_la_mia_pizzeria_crud.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,17 +15,17 @@ public class Pizza {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank
+    @NotBlank(message = "Il nome non può essere vuoto")
     private String nome;
 
     @Lob
-    @NotBlank
+    @NotBlank(message = "La descrizione non può essere vuota")
     private String descrizione;
 
-    @NotBlank
+    @NotBlank(message = "Non può non esserci un'immagine")
     private String foto;
 
-    @NotNull
+    @NotNull(message = "Il prezzo non può essere nullo")
     private double prezzo;
 
     public Pizza() {

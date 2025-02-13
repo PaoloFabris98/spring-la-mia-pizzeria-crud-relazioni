@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping("/")
 public class IndexController {
 
-    private PizzaRepository pizzaRepository;
+    private final PizzaRepository pizzaRepository;
 
     public IndexController(PizzaRepository pizzaService) {
         this.pizzaRepository = pizzaService;
