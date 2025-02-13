@@ -3,10 +3,8 @@ package com.example.spring_la_mia_pizzeria_crud.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.spring_la_mia_pizzeria_crud.services.PizzaService;
+import com.example.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -14,19 +12,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping("/")
 public class IndexController {
 
-    private final PizzaService pizzaService;
+    private PizzaRepository pizzaRepository;
 
-    public IndexController(PizzaService pizzaService) {
-        this.pizzaService = pizzaService;
+    public IndexController(PizzaRepository pizzaService) {
+        this.pizzaRepository = pizzaService;
     }
 
     @GetMapping("/")
     public String getMethodName(Model model) {
-        if (pizzaService.getAllPizzas().size() == 0) {
-            model.addAttribute("pizzas", pizzaService.getAllPizzas());
+        if (pizzaRepository.findAll().size() == 0) {
+            model.addAttribute("pizzas", pizzaRepository.findAll());
             model.addAttribute("isValid", "false");
         } else {
-            model.addAttribute("pizzas", pizzaService.getAllPizzas());
+            model.addAttribute("pizzas", pizzaRepository.findAll());
             model.addAttribute("isValid", "true");
         }
         ;
