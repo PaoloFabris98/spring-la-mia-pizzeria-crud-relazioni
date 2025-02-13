@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -25,7 +26,8 @@ public class Pizza {
     @NotBlank(message = "Non può non esserci un'immagine")
     private String foto;
 
-    @NotNull(message = "Il prezzo non può essere nullo")
+    @NotNull
+    @Min(value = 0, message = "Il prezzo dev'essere superiore a 0")
     private double prezzo;
 
     public Pizza() {
