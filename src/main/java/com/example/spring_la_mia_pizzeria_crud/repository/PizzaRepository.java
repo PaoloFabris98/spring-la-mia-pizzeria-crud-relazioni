@@ -13,8 +13,4 @@ import com.example.spring_la_mia_pizzeria_crud.java.database_controller.*;
 public interface PizzaRepository extends JpaRepository<Pizza, Integer> {
     ArrayList<Pizza> findById(int id);
 
-    /*
-     * @Query("SELECT p FROM Pizza p WHERE p.id = :id")
-     * Pizza findPizzaById(@Param("id") int id);
-     */
 }
