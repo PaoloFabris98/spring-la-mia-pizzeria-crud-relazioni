@@ -11,25 +11,31 @@
 <body>
     <th:block th:fragment="card">
         <div class="d-flex justify-content-center">
-            <div class="card m-0 p-0 " style="width: 18rem;">
-                <div class="card-header">
-                    <div class="row m-0 p-0">
-                        <div class="col-12 text-center">
-                            <h3>Pizze:</h3>
-                            </div>
-                        </div>
+            <div class="m-0 p-0 " style="width: 52rem;">
+                <div class="p-2">
+                    <div class="col-12 text-center">
+                        <h3>Pizze:</h3>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li th:if="${isValid == 'true'}" th:each="pizza : ${pizzas}" class="list-group-item">
+                </div>
+                <div class="list-group list-group-flush row">
+                    <div th:if="${isValid == 'true'}" th:each="pizza : ${pizzas}"
+                        class="list-group-item col-12 d-flex bg-dark text-white">
+                        <div class="col-2">
+                            <p>Nome: </p>
+                            <p>Foto: </p>
+                            <p>Descrizione: </p>
+                            <p>Prezzo: </p>
+                        </div>
+                        <div class="col-10">
                             <p th:text="${pizza.getNome()}"></p>
-                            <p th:text="${pizza.getFoto()}"></p>                            
+                            <p th:text="${pizza.getFoto()}"></p>
                             <p th:text="${pizza.getDescrizione()}"></p>
                             <p th:text="${pizza.getPrezzo()} + ' Euro'"></p>
-                        </li>
-                        <li th:if="${isValid == 'false'}" class="list-group-item">
-                            <p>Purtroppo non ci sono pizze disponibili.</p>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+                    <div th:if="${isValid == 'false'}" class="list-group-item">
+                        <p>Purtroppo non ci sono pizze disponibili.</p>
+                    </div>
                 </div>
             </div>
         </div>
