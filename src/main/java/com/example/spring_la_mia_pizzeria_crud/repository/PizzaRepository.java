@@ -1,6 +1,5 @@
 package com.example.spring_la_mia_pizzeria_crud.repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
