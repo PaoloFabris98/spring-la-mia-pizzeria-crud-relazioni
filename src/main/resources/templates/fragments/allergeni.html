@@ -10,9 +10,9 @@
 </head>
 
 <body>
-    <div th:fragment="allergeni(arachidi,crostacei,glutine,latte,sedano,sesamo,soia,uova)" class="d-flex">
-        <div th:if="${arachidi == true}"><img src="/imgs/allergeni/arachidi.png" style="width: 50px; height:auto"></div>
-        <div th:if="${crostacei == true}"><img src="/imgs/allergeni/crostacei.png" style="width: 50px; height:auto"></div>
+    <div th:fragment="allergeni(arachidi,crostacei,glutine,latte,sedano,sesamo,soia,uova)" class="d-flex justify-content-center">
+        <div th:if="${arachidi == true}"><img src="/imgs/allergeni/arachidi.png" style="width: 50px; height:auto"><img src="/imgs/allergeni/noci.png" style="width: 50px; height:auto"></div>
+        <div th:if="${crostacei == true}"><img src="/imgs/allergeni/crostacei.png" style="width: 50px; height:auto"><img src="/imgs/allergeni/pesce.png" style="width: 50px; height:auto"></div>
         <div th:if="${glutine == true}"><img src="/imgs/allergeni/glutine.png" style="width: 50px; height:auto"></div>
         <div th:if="${latte == true}"><img src="/imgs/allergeni/latte.png" style="width: 50px; height:auto"></div>
         <div th:if="${sedano == true}"><img src="/imgs/allergeni/sedano.png" style="width: 50px; height:auto"></div>
