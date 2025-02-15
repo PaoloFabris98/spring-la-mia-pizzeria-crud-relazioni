@@ -10,7 +10,7 @@
 
 <body>
     <a th:fragment="buttons(link, params)" 
-       th:href="@{${link}( ${params} )}" 
+       th:href="@{${link}(query=${params})}" 
        class="btn btn-outline-secondary">
         Visualizza
     </a>
