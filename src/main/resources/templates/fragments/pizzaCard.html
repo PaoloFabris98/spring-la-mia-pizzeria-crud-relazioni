@@ -12,10 +12,8 @@
     <th:block th:fragment="pizzaCard">
         <div class="d-flex justify-content-center">
             <div class="m-0 p-0 " style="width: 60rem;">
-                <div class="p-2">
-                    <div class="col-12 text-center">
-                        <h3 th:text="${pizza.getNome()}"></h3>
-                    </div>
+                <div class="p-2 bg-dark text-white">
+                    <div th:insert="~{fragments/navbar :: navBar}"></div>
                 </div>
                 <div class="row d-flex justify-content-center g-4">
                     <div class="col-md-4 col-sm-6">
@@ -28,6 +26,12 @@
                             <ul class="list-group list-group-flush list-unstyled">
                                 <li th:text="${pizza.getNome()}" class="list-group-item"></li>
                                 <li class="list-group-item" th:text="'Prezzo: ' + ${pizza.getPrezzo()} + ' Euro'"></li>
+                                <li class="list-group-item text-center">
+                                    <h5>Allergeni</h5>
+                                    <div
+                                        th:insert="~{fragments/allergeni :: allergeni(${pizza.isFrutta_a_guscio()},${pizza.isPesce_e_crostacei()},${pizza.isGlutine()},${pizza.isLattosio()},${pizza.isSedano()},${pizza.isSesamo()},${pizza.isSoia()},${pizza.isUova()})}">
+                                    </div>
+                                </li>
                                 <li th:insert="~{fragments/fragments :: button('/')}" class="mt-3"></li>
                             </ul>
                         </div>

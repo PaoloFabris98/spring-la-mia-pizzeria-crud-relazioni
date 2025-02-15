@@ -46,4 +46,15 @@ public class IndexController {
         }
         return "pizza";
     }
+
+    @GetMapping("/search-pizza")
+    public String searchPizza(@RequestParam(name = "pizzas") String pizzas, Model model) {
+        Pizza pizza = pizzaRepository.findByNome(pizzas).stream().findFirst().orElse(null);
+        if (pizza == null) {
+            model.addAttribute("message", "Pizza non trovata");
+        } else {
+            model.addAttribute("pizza", pizza);
+        }
+        return "pizza";
+    }
 }
