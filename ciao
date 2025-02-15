@@ -1,0 +1,11 @@
+INSERT INTO pizza (nome, descrizione, foto, prezzo) VALUES
+('Margherita', 'Pizza classica con pomodoro, mozzarella e basilico fresco.', '/imgs/Margherita.jpg', 5.50),
+('Pepperoni', 'Pizza con pomodoro, mozzarella e abbondante salame piccante.', '/imgs/Pepperoni.jpg', 7.00),
+('Quattro Stagioni', 'Pizza con pomodoro, mozzarella, prosciutto, funghi, carciofi e olive nere.', '/imgs/QuattroStagioni.jpg', 8.00),
+('Capricciosa', 'Pizza con pomodoro, mozzarella, prosciutto cotto, funghi, olive e carciofi.', '/imgs/Capricciosa.jpg', 8.50),
+('Diavola', 'Pizza piccante con pomodoro, mozzarella, salame piccante e peperoncini.', '/imgs/Diavola.jpg', 7.50),
+('Hawaii', 'Pizza con pomodoro, mozzarella, prosciutto e ananas.', '/imgs/Hawaii.jpg', 6.50),
+('Vegetariana', 'Pizza con pomodoro, mozzarella, verdure grigliate e olive nere.', '/imgs/Vegetariana.jpg', 7.00),
+('Quattro Formaggi', 'Pizza con mozzarella, gorgonzola, emmental e parmigiano.', '/imgs/QuattroFormaggi.jpg', 9.00),
+('Frutti di Mare', 'Pizza con pomodoro, mozzarella e frutti di mare freschi.', '/imgs/FruttiDiMare.jpg', 10.00),
+('Romana', 'Pizza con pomodoro, mozzarella, acciughe, capperi e origano.', '/imgs/Romana.jpg', 7.00);
