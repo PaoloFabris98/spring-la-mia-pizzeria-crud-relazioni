@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.spring_la_mia_pizzeria_crud.model.Pizza;
 import com.example.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,9 +38,13 @@ public class IndexController {
 
     @GetMapping("/pizza")
     public String seePizza(@RequestParam(name = "query") String query, Model model) {
-        System.out.println("Query Parameter: " + query);
-        model.addAttribute("pizza", pizzaRepository.findByNome(query));
-        model.addAttribute("isValid", "true");
+        Pizza pizza = pizzaRepository.findByNome(query).stream().findFirst().orElse(null);
+
+        if (pizza == null) {
+            model.addAttribute("message", "Pizza non trovata");
+        } else {
+            model.addAttribute("pizza", pizza);
+        }
         return "pizza";
     }
 }
