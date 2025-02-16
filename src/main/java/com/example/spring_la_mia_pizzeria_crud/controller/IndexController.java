@@ -52,11 +52,11 @@ public class IndexController {
 
     @GetMapping("/search-pizza")
     public String searchPizza(@RequestParam(name = "pizzas") String pizzas, Model model) {
-        List<Pizza> pizza = pizzaRepository.findByNomeContaining(pizzas);
-        if (pizza.isEmpty()) {
-            return "redirect:/index";
+        List<Pizza> pizze = pizzaRepository.findByNomeContaining(pizzas);
+        if (pizzas == "" || pizzas == null) {
+            return "redirect:/";
         } else {
-            model.addAttribute("pizzas", pizza);
+            model.addAttribute("pizzas", pizze);
             return "pizza";
         }
     }

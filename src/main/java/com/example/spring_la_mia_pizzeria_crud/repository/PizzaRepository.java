@@ -12,5 +12,4 @@ public interface PizzaRepository extends JpaRepository<Pizza, Integer> {
     public List<Pizza> findById(int id);
 
     public List<Pizza> findByNomeContaining(String name);
-
 }
