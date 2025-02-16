@@ -11,24 +11,21 @@
     <th:block th:fragment="navBar">
         <div class="bg-dark text-white m-1 p-2 rounded">
             <div class="row align-items-center">
-                <div class="col-2">
-                    <h2><a th:href="@{'/'}" class="text-white text-decoration-none">Home</a></h2>
+                <div class="col-3">
+                    <h4><a th:href="@{'/'}" class="text-white">🍕 La Mia Pizzeria</a></h4>
                 </div>
-                <div class="col-10 text-end">
-                    <form class="row justify-content-end" th:action="@{/search-pizza}" method="GET">
-                        <div class="col-md-4">
-                            <input type="text" name="pizzas" id="pizzas" class="form-control form-control-lg" placeholder="Che pizza vuoi cercare?">
-                        </div>
-                        <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary btn-lg w-100">Cerca</button>
-                        </div>
-                    </form>
-                    
-                </div>
+                <div class="col-12 col-md-9 text-end">
+                        <form class="d-flex justify-content-end" th:action="@{/search-pizza}" method="GET">
+                            <div class="input-group w-50">
+                                <input type="text" name="pizzas" id="pizzas" class="form-control form-control-lg" placeholder="Che pizza vuoi cercare?" aria-label="Cerca pizza">
+                                <button type="submit" class="btn btn-primary btn-lg">Cerca</button>
+                            </div>
+                        </form>
+                    </div>
             </div>
         </div>
     </th:block>
-    
+
 </body>
 
 </html>

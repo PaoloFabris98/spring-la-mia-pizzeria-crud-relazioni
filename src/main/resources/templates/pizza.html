@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/card.css}" />
 
 </head>
 
 <body class="bg-dark">
-    <div class="container bg-white">
+    <div class="container bg-white" style="background-image: url('/imgs/sfondo/background.jpg'); background-size: cover;">
         
         <div th:replace="~{fragments/pizzaCard :: pizzaCard}"></div>
     </div>

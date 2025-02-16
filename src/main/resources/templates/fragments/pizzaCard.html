@@ -5,19 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
-
 </head>
 
 <body>
     <th:block th:fragment="pizzaCard">
         <div class="d-flex justify-content-center">
-            <div class="m-0 p-0 " style="width: 60rem;">
+            <div class="m-0 p-0" style="width: 60rem;">
                 <div class="p-2 bg-dark text-white">
                     <div th:insert="~{fragments/navbar :: navBar}"></div>
                 </div>
                 <div class="row d-flex justify-content-center g-4">
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card p-3 mx-auto" style="width: 18rem;">
+                    <div class="col-md-4 col-sm-6 d-flex align-items-stretch" th:each="pizza : ${pizzas}">
+                        <div class="card p-3 mx-auto h-100" style="width: 18rem;">
                             <img th:src="${pizza.getFoto()}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title" th:text="${pizza.getNome()}"></h5>
@@ -37,7 +36,6 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
     </th:block>

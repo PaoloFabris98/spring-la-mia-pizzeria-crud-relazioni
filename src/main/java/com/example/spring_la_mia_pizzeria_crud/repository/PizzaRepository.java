@@ -1,5 +1,6 @@
 package com.example.spring_la_mia_pizzeria_crud.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +12,6 @@ import com.example.spring_la_mia_pizzeria_crud.model.Pizza;
 public interface PizzaRepository extends JpaRepository<Pizza, Integer> {
     public List<Pizza> findById(int id);
 
-    public List<Pizza> findByNome(String name);
+    public List<Pizza> findByNomeContaining(String name);
 
 }

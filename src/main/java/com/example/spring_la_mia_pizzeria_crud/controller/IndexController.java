@@ -1,5 +1,8 @@
 package com.example.spring_la_mia_pizzeria_crud.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,24 +40,25 @@ public class IndexController {
 
     @GetMapping("/pizza")
     public String seePizza(@RequestParam(name = "query") String query, Model model) {
-        Pizza pizza = pizzaRepository.findByNome(query).stream().findFirst().orElse(null);
+        Pizza pizza = pizzaRepository.findByNomeContaining(query).stream().findFirst().orElse(null);
 
         if (pizza == null) {
             model.addAttribute("message", "Pizza non trovata");
         } else {
-            model.addAttribute("pizza", pizza);
+            model.addAttribute("pizzas", pizza);
         }
+
         return "pizza";
     }
 
     @GetMapping("/search-pizza")
     public String searchPizza(@RequestParam(name = "pizzas") String pizzas, Model model) {
-        Pizza pizza = pizzaRepository.findByNome(pizzas).stream().findFirst().orElse(null);
-        if (pizza == null) {
-            model.addAttribute("message", "Pizza non trovata");
+        List<Pizza> pizza = pizzaRepository.findByNomeContaining(pizzas);
+        if (pizza.isEmpty()) {
+            return "redirect:/";
         } else {
-            model.addAttribute("pizza", pizza);
+            model.addAttribute("pizzas", pizza);
+            return "pizza";
         }
-        return "pizza";
     }
 }
