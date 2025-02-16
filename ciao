@@ -12,5 +12,5 @@ INSERT INTO pizza (nome, descrizione, foto, prezzo, glutine, lattosio, uova, fru
 ('Pizza alla Carbonara', 'Pizza con uova fresche, pancetta e formaggio', '/imgs/Carbonara.jpg', 10.00, true, false, true, false, false, false, false, false, false),
 ('Pizza Vegana alla Soia', 'Pizza con salsa di soia, verdure grigliate e tofu', '/imgs/Soia.jpg', 12.00, true, false, false, false, true, false, false, false, false),
 ('Pizza Rustica al Sedano', 'Pizza con crema di sedano, mozzarella e noci croccanti', '/imgs/Sedano.jpg', 11.50, false, false, false, true, false, false, false, true, false),
-('Margherita', 'Pizza classica con pomodoro, mozzarella e basilico fresco.', '/imgs/Margherita.jpg', 5.50, true, true, false, false, false, false, false, false, false),
+('Margherita69', 'Pizza classica con pomodoro, mozzarella e basilico fresco.', '/imgs/Margherita.jpg', 5.50, true, true, false, false, false, false, false, false, false),
 ('Pepperoni', 'Pizza con pomodoro, mozzarella e abbondante salame piccante.', '/imgs/Pepperoni.jpg', 7.00, true, true, false, false, false, false, false, false, false);

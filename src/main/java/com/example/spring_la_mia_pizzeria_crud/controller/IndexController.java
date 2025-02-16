@@ -54,7 +54,7 @@ public class IndexController {
     public String searchPizza(@RequestParam(name = "pizzas") String pizzas, Model model) {
         List<Pizza> pizza = pizzaRepository.findByNomeContaining(pizzas);
         if (pizza.isEmpty()) {
-            return "redirect:/";
+            return "redirect:/index";
         } else {
             model.addAttribute("pizzas", pizza);
             return "pizza";
