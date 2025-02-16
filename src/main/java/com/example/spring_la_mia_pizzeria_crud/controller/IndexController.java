@@ -60,4 +60,9 @@ public class IndexController {
             return "pizza";
         }
     }
+
+    @GetMapping("/contatti")
+    public String contatti(Model model) {
+        return "contatti";
+    }
 }

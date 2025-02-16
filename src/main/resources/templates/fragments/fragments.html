@@ -11,12 +11,12 @@
 <body>
     <a th:fragment="buttons(link, params)" 
        th:href="@{${link}(query=${params})}" 
-       class="btn btn-outline-secondary">
+       class="btn btn-outline-secondary d-flex justify-content-center">
         Visualizza
     </a>
     <a th:fragment="button(link)" 
        th:href="@{${link}}" 
-       class="btn btn-outline-secondary">
+       class="btn btn-outline-secondary d-flex justify-content-center">
        Home
     </a>
 
