@@ -23,7 +23,6 @@ public class Pizza {
     @NotBlank(message = "La descrizione non può essere vuota")
     private String descrizione;
 
-    @NotBlank(message = "Non può non esserci un'immagine")
     private String foto;
 
     @NotNull

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/stile.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/card.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/navbar.css}" />
+</head>
+
+<body class="bg-dark">
+    <div class="container" style="background-image: url('/imgs/sfondo/background.jpg'); background-size: cover;">
+        <div class="p-3 bg-dark text-white">
+            <div th:insert="~{fragments/navbar :: navBar}"></div>
+        </div>
+        <div>
+            <form th:action="@{/crea_pizza}" method="post" id="addPizza-form" th:object="${pizza}" class="bg-dark text-white container">
+                <div class="m-3 p-2">
+                    <label for="Nome" class="form-label">Nome Pizza</label>
+                    <input class="form-control" type="text" id="Nome" th:field="*{nome}" placeholder="Inserisci il nome della pizza">
+                </div>
+                <div class="m-3 p-2">
+                    <label for="Descrizione" class="form-label">Descrizione</label>
+                    <textarea id="Descrizione" class="form-control" rows="4" th:field="*{descrizione}" placeholder="Descrivi la tua pizza"></textarea>
+                </div>
+                <div class="m-3 p-2">
+                    <label for="Foto" class="form-label">Foto</label>
+                    <input class="form-control" type="text" id="Foto" th:field="*{foto}" placeholder="Aggiungi una foto alla tua pizza">
+                </div>
+                <div class="m-3 p-2">
+                    <label for="Prezzo" class="form-label">Prezzo</label>
+                    <input class="form-control" type="number" id="Prezzo" th:field="*{prezzo}">
+                </div>
+
+                <!-- allergeni -->
+                <div class="m-3 p-2">
+                    <label class="form-label">Allergeni</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="glutine" th:field="*{glutine}">
+                                <label class="form-check-label" for="glutine">Contiene glutine</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="lattosio" th:field="*{lattosio}">
+                                <label class="form-check-label" for="lattosio">Contiene lattosio</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="uova" th:field="*{uova}">
+                                <label class="form-check-label" for="uova">Contiene uova</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="frutta_a_guscio" th:field="*{frutta_a_guscio}">
+                                <label class="form-check-label" for="frutta_a_guscio">Contiene frutta a guscio</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="soia" th:field="*{soia}">
+                                <label class="form-check-label" for="soia">Contiene soia</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="pesce_e_crostacei" th:field="*{pesce_e_crostacei}">
+                                <label class="form-check-label" for="pesce_e_crostacei">Contiene pesce e crostacei</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="sesamo" th:field="*{sesamo}">
+                                <label class="form-check-label" for="sesamo">Contiene sesamo</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="sedano" th:field="*{sedano}">
+                                <label class="form-check-label" for="sedano">Contiene sedano</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="senape" th:field="*{senape}">
+                                <label class="form-check-label" for="senape">Contiene senape</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="submit" value="Aggiungi Pizza" class="btn btn-primary m-3 p-2">
+                <input type="reset" value="Reset" class="btn btn-warning m-3 p-2">
+            </form>
+        </div>
+    </div>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+    <!--JS-->
+    <script th:src="@{/js/app.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

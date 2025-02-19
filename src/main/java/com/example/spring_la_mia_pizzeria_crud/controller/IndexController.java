@@ -65,6 +65,12 @@ public class IndexController {
         }
     }
 
+    @GetMapping("/crea_pizza")
+    public String addPizza(Model model) {
+        model.addAttribute("pizza", new Pizza());
+        return "addPizza";
+    }
+
     @GetMapping("/contatti")
     public String contatti(Model model) {
         return "contatti";
