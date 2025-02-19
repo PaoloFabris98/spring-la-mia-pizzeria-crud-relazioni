@@ -30,23 +30,23 @@ public class Pizza {
     private double prezzo;
 
     // ! allergeni
-    @NotBlank
+    @NotNull(message = "Il glutine dev'essere vero o falso")
     private Boolean glutine = false;
-    @NotBlank
+    @NotNull(message = "Il lattosio dev'essere vero o falso")
     private Boolean lattosio = false;
-    @NotBlank
+    @NotNull(message = "le uova devono essere vere o false")
     private Boolean uova = false;
-    @NotBlank
+    @NotNull(message = "la frutta_a_guscio dev'essere vera o falsa")
     private Boolean frutta_a_guscio = false;
-    @NotBlank
+    @NotNull(message = "la soia dev'essere vera o falsa")
     private Boolean soia = false;
-    @NotBlank
+    @NotNull(message = "i pesci e crostacei devono essere veri o falsi")
     private Boolean pesce_e_crostacei = false;
-    @NotBlank
+    @NotNull(message = "Il sesamo dev'essere vero o falso")
     private Boolean sesamo = false;
-    @NotBlank
+    @NotNull(message = "Il sedano dev'essere vero o falso")
     private Boolean sedano = false;
-    @NotBlank
+    @NotNull(message = "la senape dev'essere vera o falsa")
     private Boolean senape = false;
 
     public Pizza() {

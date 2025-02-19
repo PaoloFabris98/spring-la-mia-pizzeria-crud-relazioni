@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -13,6 +16,8 @@ import com.example.spring_la_mia_pizzeria_crud.model.Pizza;
 import com.example.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequestMapping("/")
@@ -69,6 +74,15 @@ public class IndexController {
     public String addPizza(Model model) {
         model.addAttribute("pizza", new Pizza());
         return "addPizza";
+    }
+
+    @PostMapping("/crea_pizza")
+    public String addPizza(@Valid @ModelAttribute("pizza") Pizza formpizza, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "addPizza";
+        }
+
+        return "redirect:/";
     }
 
     @GetMapping("/contatti")
