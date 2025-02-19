@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,12 +39,13 @@ public class IndexController {
     }
 
     @GetMapping("/pizza")
-    public String seePizza(@RequestParam(name = "query") String query, Model model) {
+    public String seePizza(@RequestParam(name = "query") String query, Model model, HttpServletRequest request) {
         Pizza pizza = pizzaRepository.findByNomeContaining(query).stream().findFirst().orElse(null);
 
         if (pizza == null) {
             model.addAttribute("message", "Pizza non trovata");
         } else {
+            model.addAttribute("currentURI", request.getRequestURI());
             model.addAttribute("pizzas", pizza);
         }
 
@@ -51,11 +53,13 @@ public class IndexController {
     }
 
     @GetMapping("/search-pizza")
-    public String searchPizza(@RequestParam(name = "pizzas") String pizzas, Model model) {
+    public String searchPizza(@RequestParam(name = "pizzas") String pizzas, Model model, HttpServletRequest request) {
         List<Pizza> pizze = pizzaRepository.findByNomeContaining(pizzas);
         if (pizzas == "" || pizzas == null) {
             return "redirect:/";
         } else {
+
+            model.addAttribute("currentURI", request.getRequestURI());
             model.addAttribute("pizzas", pizze);
             return "pizza";
         }

@@ -8,33 +8,51 @@
 </head>
 
 <body>
-    <th:block th:fragment="pizzaCard">
-        <div class="d-flex justify-content-center" id="card">
-            <div class="m-0 p-0" style="width: 60rem; max-width: 100%;">
-                <div class="p-2 bg-dark text-white">
+    <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+
+<body>
+    <th:block th:fragment="pizzaTable">
+        <div class="d-flex justify-content-center" id="table">
+            <div class="m-0 p-3" style="width: 80rem; max-width: 100%;">
+                <div class="p-3 bg-dark text-white">
                     <div th:insert="~{fragments/navbar :: navBar}"></div>
                 </div>
-                <div class="row d-flex justify-content-center g-4">
-                    <div class="col-md-4 col-sm-6 d-flex align-items-stretch" th:each="pizza : ${pizzas}">
-                        <div class="card p-3 mx-auto h-100" style="width: 18rem;">
-                            <img th:src="${pizza.getFoto()}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title" th:text="${pizza.getNome()}"></h5>
-                                <p class="card-text" th:text="${pizza.getDescrizione()}"></p>
-                            </div>
-                            <ul class="list-group list-group-flush list-unstyled">
-                                <li th:text="${pizza.getNome()}" class="list-group-item"></li>
-                                <li class="list-group-item" th:text="'Prezzo: ' + ${pizza.getPrezzo()} + ' Euro'"></li>
-                                <li class="list-group-item text-center">
+                
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Nome</th>
+                                <th>Descrizione</th>
+                                <th>Prezzo</th>
+                                <th>Allergeni</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="pizza : ${pizzas}">
+                                <td th:text="${pizza.getNome()}"></td>
+                                <td th:text="${pizza.getDescrizione()}"></td>
+                                <td th:text="'€ ' + ${pizza.getPrezzo()}"></td>
+                                <td>
                                     <h5>Allergeni</h5>
-                                    <div
-                                        th:insert="~{fragments/allergeni :: allergeni(${pizza.isFrutta_a_guscio()},${pizza.isPesce_e_crostacei()},${pizza.isGlutine()},${pizza.isLattosio()},${pizza.isSedano()},${pizza.isSesamo()},${pizza.isSoia()},${pizza.isUova()})}">
-                                    </div>
-                                </li>
-                                <li th:insert="~{fragments/fragments :: button('/')}" class="mt-3"></li>
-                            </ul>
-                        </div>
-                    </div>
+                                    <div th:insert="~{fragments/allergeni :: allergeni(${pizza.isFrutta_a_guscio()},${pizza.isPesce_e_crostacei()},${pizza.isGlutine()},${pizza.isLattosio()},${pizza.isSedano()},${pizza.isSesamo()},${pizza.isSoia()},${pizza.isUova()})}"></div>
+                                </td>
+                                <td>
+                                    <div th:if="${currentURI == '/pizza'}" th:insert="~{fragments/fragments :: button('/')}"></div>
+                                    <div th:if="${currentURI == '/search-pizza'}" th:insert="~{fragments/fragments :: buttons('/pizza', ${pizza.getNome()})}"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
