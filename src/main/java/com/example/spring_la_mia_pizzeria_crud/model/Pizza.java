@@ -26,7 +26,7 @@ public class Pizza {
     private String foto;
 
     @NotNull
-    @Min(value = 0, message = "Il prezzo dev'essere superiore a 0")
+    @Min(value = 1, message = "Il prezzo dev'essere superiore a 0 e almeno di 1 euro")
     private double prezzo;
 
     // ! allergeni

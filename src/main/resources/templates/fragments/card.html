@@ -14,8 +14,11 @@
             <div class="m-0 p-3" style="width: 80rem; max-width: 100%;">
                 <div class="p-3 bg-dark text-white">
                     <div th:insert="~{fragments/navbar :: navBar}"></div>
+                    <div class="redirect-messages alert alert-success text-center" th:if="${message != null}">
+                        <h3 th:text="${message}"></h3>
+                    </div>
                 </div>
-                
+
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
@@ -33,8 +36,12 @@
                                 <td th:text="${pizza.getDescrizione()}"></td>
                                 <td th:text="'€ ' + ${pizza.getPrezzo()}"></td>
                                 <td>
-                                    <h5>Allergeni</h5>
-                                    <div th:insert="~{fragments/allergeni :: allergeni(${pizza.isFrutta_a_guscio()},${pizza.isPesce_e_crostacei()},${pizza.isGlutine()},${pizza.isLattosio()},${pizza.isSedano()},${pizza.isSesamo()},${pizza.isSoia()},${pizza.isUova()})}"></div>
+                                    <div class="row text-center">
+                                        <h5 class="col-12">Allergeni</h5>
+                                        <div
+                                            th:insert="~{fragments/allergeni :: allergeni(${pizza.isFrutta_a_guscio()},${pizza.isPesce_e_crostacei()},${pizza.isGlutine()},${pizza.isLattosio()},${pizza.isSedano()},${pizza.isSesamo()},${pizza.isSoia()},${pizza.isUova()})}" class="">
+                                        </div>
+                                    </div>
                                 </td>
                                 <td th:insert="~{fragments/fragments :: buttons('/pizza', ${pizza.getNome()})}"></td>
                             </tr>
