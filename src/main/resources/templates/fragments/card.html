@@ -14,8 +14,10 @@
             <div class="m-0 p-3" style="width: 80rem; max-width: 100%;">
                 <div class="p-3 bg-dark text-white">
                     <div th:insert="~{fragments/navbar :: navBar}"></div>
-                    <div class="redirect-messages alert alert-success text-center" th:if="${message != null}">
-                        <h3 th:text="${message}"></h3>
+                    <div th:if="${message != null && messageClass != null}">
+                        <div class="alert text-center" th:classappend="${messageClass}">
+                            <p th:text="${message}"></p>
+                        </div>
                     </div>
                 </div>
 
@@ -34,12 +36,12 @@
                             <tr th:if="${isValid == 'true'}" th:each="pizza : ${pizzas}">
                                 <td th:text="${pizza.getNome()}"></td>
                                 <td th:text="${pizza.getDescrizione()}"></td>
-                                <td th:text="'€ ' + ${pizza.getPrezzo()}"></td>
+                                <td th:text="${pizza.getPrezzo()} + '€'"></td>
                                 <td>
                                     <div class="row text-center">
                                         <h5 class="col-12">Allergeni</h5>
-                                        <div
-                                            th:insert="~{fragments/allergeni :: allergeni(${pizza.isFrutta_a_guscio()},${pizza.isPesce_e_crostacei()},${pizza.isGlutine()},${pizza.isLattosio()},${pizza.isSedano()},${pizza.isSesamo()},${pizza.isSoia()},${pizza.isUova()})}" class="">
+                                        <div th:insert="~{fragments/allergeni :: allergeni(${pizza.isFrutta_a_guscio()},${pizza.isPesce_e_crostacei()},${pizza.isGlutine()},${pizza.isLattosio()},${pizza.isSedano()},${pizza.isSesamo()},${pizza.isSoia()},${pizza.isUova()})}"
+                                            class="">
                                         </div>
                                     </div>
                                 </td>

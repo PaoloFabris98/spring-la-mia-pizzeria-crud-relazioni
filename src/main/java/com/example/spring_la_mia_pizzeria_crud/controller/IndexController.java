@@ -87,6 +87,7 @@ public class IndexController {
         pizzaRepository.save(formpizza);
 
         redirectAttributes.addFlashAttribute("message", "La tua pizza è stata creata");
+        redirectAttributes.addFlashAttribute("messageClass", "alert-success");
 
         return "redirect:/";
     }
