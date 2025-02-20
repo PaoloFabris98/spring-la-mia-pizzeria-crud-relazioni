@@ -45,7 +45,11 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td th:insert="~{fragments/fragments :: buttons('/pizza', ${pizza.getNome()})}"></td>
+                                <td>
+                                    <div th:insert="~{fragments/fragments :: buttons('/pizza', ${pizza.getNome()})}">
+                                    </div>
+                                    <div th:insert="~{fragments/fragments :: buttonEdit('/edit/' + ${pizza.getId()})}"></div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

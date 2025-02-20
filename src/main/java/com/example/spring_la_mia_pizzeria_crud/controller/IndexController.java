@@ -18,6 +18,7 @@ import com.example.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -87,6 +88,27 @@ public class IndexController {
         pizzaRepository.save(formpizza);
 
         redirectAttributes.addFlashAttribute("message", "La tua pizza è stata creata");
+        redirectAttributes.addFlashAttribute("messageClass", "alert-success");
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editPizza(@PathVariable Integer id, Model model) {
+        model.addAttribute("pizza", pizzaRepository.findById(id).get());
+        return "editPizza";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editPizza(@Valid @ModelAttribute("pizza") Pizza formpizza, BindingResult bindingResult, Model model,
+            RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            return "editPizza";
+        }
+
+        pizzaRepository.save(formpizza);
+
+        redirectAttributes.addFlashAttribute("message", "Pizza modificata con successo");
         redirectAttributes.addFlashAttribute("messageClass", "alert-success");
 
         return "redirect:/";
