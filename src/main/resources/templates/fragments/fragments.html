@@ -11,7 +11,7 @@
 <body>
     <a th:fragment="buttons(link, params)" 
        th:href="@{${link}(query=${params})}" 
-       class="btn btn-outline-secondary d-flex justify-content-center">
+       class="btn btn-primary d-flex justify-content-center">
         Visualizza
     </a>
     <a th:fragment="button(link)" 
@@ -21,7 +21,7 @@
     </a>
     <a th:fragment="buttonEdit(link)" 
        th:href="@{${link}}" 
-       class="btn btn-outline-secondary d-flex justify-content-center">
+       class="btn btn-success d-flex justify-content-center">
         Edit
     </a>
 
