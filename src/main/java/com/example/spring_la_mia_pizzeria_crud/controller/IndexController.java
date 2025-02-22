@@ -114,6 +114,17 @@ public class IndexController {
         return "redirect:/";
     }
 
+    @PostMapping("/delete/{id}")
+    public String deletePizza(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        Pizza pizza = pizzaRepository.findById(id).get();
+        pizzaRepository.delete(pizza);
+        redirectAttributes.addFlashAttribute("message",
+                "La pizza: " + pizza.getNome() + ", è stata cancellata con successo.");
+        redirectAttributes.addFlashAttribute("messageClass", "alert-danger");
+
+        return "redirect:/";
+    }
+
     @GetMapping("/contatti")
     public String contatti(Model model) {
         return "contatti";
