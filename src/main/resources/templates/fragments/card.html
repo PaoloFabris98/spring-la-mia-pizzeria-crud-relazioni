@@ -33,7 +33,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:if="${isValid == 'true'}" th:each="pizza : ${pizzas}">
+                            <tr th:each="pizza : ${pizzas}">
                                 <td th:text="${pizza.getNome()}"></td>
                                 <td class="small" th:text="${pizza.getDescrizione()}"></td>
                                 <td class="small" th:text="${pizza.getPrezzo()} + '€'"></td>
