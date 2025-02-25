@@ -16,7 +16,7 @@
             <div th:insert="~{fragments/navbar :: navBar}"></div>
         </div>
         <div>
-            <form th:action="@{/crea_pizza}" method="post" id="addPizza-form" th:object="${pizza}" class="bg-dark text-white container">
+            <form th:action="@{/creaPizza}" method="post" id="addPizza-form" th:object="${pizza}" class="bg-dark text-white container">
                 <div class="m-3 p-2">
                     <label for="Nome" class="form-label">Nome Pizza</label>
                     <input class="form-control" type="text" id="Nome" th:field="*{nome}" placeholder="Inserisci il nome della pizza" th:errorClass="is-invalid">

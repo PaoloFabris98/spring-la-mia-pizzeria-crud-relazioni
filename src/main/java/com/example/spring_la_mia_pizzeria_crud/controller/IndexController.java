@@ -26,14 +26,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class IndexController {
 
     @Autowired
-    private final PizzaRepository pizzaRepository;
-
-    public IndexController(PizzaRepository pizzaService) {
-        this.pizzaRepository = pizzaService;
-    }
+    private PizzaRepository pizzaRepository;
 
     @GetMapping("/")
-    public String getMethodName(Model model) {
+    public String index(Model model) {
         if (pizzaRepository.findAll().size() == 0) {
             model.addAttribute("pizzas", pizzaRepository.findAll());
             model.addAttribute("isValid", "false");
@@ -43,86 +39,6 @@ public class IndexController {
         }
         ;
         return "index";
-    }
-
-    @GetMapping("/pizza")
-    public String seePizza(@RequestParam(name = "query") String query, Model model, HttpServletRequest request) {
-        Pizza pizza = pizzaRepository.findByNomeContaining(query).stream().findFirst().orElse(null);
-
-        if (pizza == null) {
-            model.addAttribute("message", "Pizza non trovata");
-        } else {
-            model.addAttribute("currentURI", request.getRequestURI());
-            model.addAttribute("pizzas", pizza);
-        }
-
-        return "pizza";
-    }
-
-    @GetMapping("/search-pizza")
-    public String searchPizza(@RequestParam(name = "pizzas") String pizzas, Model model, HttpServletRequest request) {
-        List<Pizza> pizze = pizzaRepository.findByNomeContaining(pizzas);
-        if (pizzas == "" || pizzas == null) {
-            return "redirect:/";
-        } else {
-
-            model.addAttribute("currentURI", request.getRequestURI());
-            model.addAttribute("pizzas", pizze);
-            return "pizza";
-        }
-    }
-
-    @GetMapping("/crea_pizza")
-    public String addPizza(Model model) {
-        model.addAttribute("pizza", new Pizza());
-        return "addPizza";
-    }
-
-    @PostMapping("/crea_pizza")
-    public String addPizza(@Valid @ModelAttribute("pizza") Pizza formpizza, BindingResult bindingResult, Model model,
-            RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            return "addPizza";
-        }
-
-        pizzaRepository.save(formpizza);
-
-        redirectAttributes.addFlashAttribute("message", "La tua pizza è stata creata");
-        redirectAttributes.addFlashAttribute("messageClass", "alert-success");
-
-        return "redirect:/";
-    }
-
-    @GetMapping("/edit/{id}")
-    public String editPizza(@PathVariable Integer id, Model model) {
-        model.addAttribute("pizza", pizzaRepository.findById(id).get());
-        return "editPizza";
-    }
-
-    @PostMapping("/edit/{id}")
-    public String editPizza(@Valid @ModelAttribute("pizza") Pizza formpizza, BindingResult bindingResult, Model model,
-            RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            return "editPizza";
-        }
-
-        pizzaRepository.save(formpizza);
-
-        redirectAttributes.addFlashAttribute("message", "Pizza modificata con successo");
-        redirectAttributes.addFlashAttribute("messageClass", "alert-success");
-
-        return "redirect:/";
-    }
-
-    @PostMapping("/delete/{id}")
-    public String deletePizza(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
-        Pizza pizza = pizzaRepository.findById(id).get();
-        pizzaRepository.delete(pizza);
-        redirectAttributes.addFlashAttribute("message",
-                "La pizza: " + pizza.getNome() + ", è stata cancellata con successo.");
-        redirectAttributes.addFlashAttribute("messageClass", "alert-danger");
-
-        return "redirect:/";
     }
 
     @GetMapping("/contatti")

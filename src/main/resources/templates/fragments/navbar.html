@@ -19,12 +19,12 @@
                         <a th:href="@{'/contatti'}" class="text-white">Contatti</a>
                     </div>
                     <div class="navbar-links m-0 me-3">
-                        <a th:href="@{'/crea_pizza'}" class="text-white">Aggiungi Pizza</a>
+                        <a th:href="@{'/creaPizza'}" class="text-white">Aggiungi Pizza</a>
                     </div>
                 </div>
                 
                 <div class="col-md-6">
-                    <form class="d-flex justify-content-end" th:action="@{/search-pizza}" method="GET">
+                    <form class="d-flex justify-content-end" th:action="@{/searchPizza}" method="GET">
                         <div class="input-group w-75">
                             <input type="text" name="pizzas" id="pizzas" class="form-control" placeholder="Che pizza vuoi cercare?" aria-label="Cerca pizza">
                             <button type="submit" class="btn btn-primary">Cerca</button>
