@@ -7,9 +7,9 @@
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
 </head>
 <body>
-    <th:block th:fragment="pizzaTable">
-        <div class="d-flex justify-content-center" id="table">
-            <div class="m-0 p-3" style="width: 80rem; max-width: 100%;">
+    <th:block th:fragment="table">
+        <div class="container-fluid px-4">
+            <div class="m-0 p-3">
                 <div class="p-3 bg-dark text-white">
                     <div th:insert="~{fragments/navbar :: navBar}"></div>
                     <div th:if="${message != null && messageClass != null}">
@@ -18,23 +18,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
+
+                <div class="table-responsive w-100">
+                    <table class="table table-bordered table-striped text-center">
                         <thead class="table-dark">
                             <tr>
                                 <th>Nome</th>
                                 <th>Descrizione</th>
                                 <th>Prezzo</th>
                                 <th>Allergeni</th>
-                                <!-- Forzo la larghezza della colonna Azioni -->
-                                <th style="width:150px;">Azioni</th>
+                                <th>Azioni</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="pizza : ${pizzas}">
                                 <td th:text="${pizza.getNome()}"></td>
                                 <td class="small" th:text="${pizza.getDescrizione()}"></td>
-                                <td class="small" th:text="'€ ' + ${pizza.getPrezzo()}"></td>
+                                <td class="small" th:text="${pizza.getPrezzo()} + '€'"></td>
                                 <td class="small">
                                     <div class="text-center">
                                         <h6>Allergeni</h6>
@@ -50,15 +50,16 @@
                                         )}"></div>
                                     </div>
                                 </td>
-                                <!-- Imposto anche nello stile della cella -->
-                                <td style="width:150px;">
+                                <td>
                                     <div class="d-flex gap-2">
                                         <div th:insert="~{fragments/fragments :: buttons('/pizza', ${pizza.getNome()})}"></div>
                                         <div th:insert="~{fragments/fragments :: buttonEdit('/edit/' + ${pizza.getId()})}"></div>
+
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                             th:data-bs-target="'#delete-modal-' + ${pizza.getId()}">
                                             Delete
                                         </button>
+
                                         <div class="modal fade" th:id="'delete-modal-' + ${pizza.getId()}" tabindex="-1">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
