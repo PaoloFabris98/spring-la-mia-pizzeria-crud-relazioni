@@ -26,11 +26,11 @@ public class IndexController {
             model.addAttribute("isValid", "true");
         }
         ;
-        return "index";
+        return "index/index";
     }
 
     @GetMapping("/contatti")
     public String contatti(Model model) {
-        return "contatti";
+        return "index/contatti";
     }
 }

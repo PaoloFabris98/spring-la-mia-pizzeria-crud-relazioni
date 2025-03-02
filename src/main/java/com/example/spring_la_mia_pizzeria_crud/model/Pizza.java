@@ -1,10 +1,16 @@
 package com.example.spring_la_mia_pizzeria_crud.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -28,6 +34,10 @@ public class Pizza {
     @NotNull
     @Min(value = 1, message = "Il prezzo dev'essere superiore a 0 e almeno di 1 euro")
     private double prezzo;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "ingrediente_pizza", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingrediente_id"))
+    private List<Ingrediente> ingredienti;
 
     // ! allergeni
     @NotNull(message = "Il glutine dev'essere vero o falso")
@@ -109,6 +119,14 @@ public class Pizza {
 
     public void setPrezzo(double prezzo) {
         this.prezzo = prezzo;
+    }
+
+    public List<Ingrediente> getIngredienti() {
+        return this.ingredienti;
+    }
+
+    public void setIngredienti(List<Ingrediente> ingredienti) {
+        this.ingredienti = ingredienti;
     }
 
     public Boolean isGlutine() {

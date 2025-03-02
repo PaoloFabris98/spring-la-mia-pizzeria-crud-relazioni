@@ -27,10 +27,8 @@ public class SpecialOffers {
     private int id;
 
     @Lob
-    @NotBlank(message = "La descrizione non può essere vuota")
     private String descrizione;
 
-    @Min(value = 0, message = "Il prezzo dev'essere superiore a 0")
     private double fixedDiscount = 0.0;
 
     private LocalDate discountStart;

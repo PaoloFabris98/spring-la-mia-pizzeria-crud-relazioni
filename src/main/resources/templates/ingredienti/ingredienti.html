@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:rel="stylesheet" th:href="@{/css/styles.css}" />
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/ingredienti.css}" />
 </head>
 
 <body>
     <th:block th:fragment="table">
     <div class="container-fluid px-4">
         <div class="m-0 p-3">
-            <div class="p-3 bg-dark text-white">
+            <div class="p-3 bg-dark text-white rounded shadow">
                 <div th:insert="~{fragments/navbar :: navBar}"></div>
                 <div th:if="${message != null && messageClass != null}">
                     <div class="alert text-center" th:classappend="${messageClass}">
@@ -21,48 +22,24 @@
                 </div>
             </div>
 
-            <div class="table-responsive w-100">
-                <table class="table table-bordered table-striped text-center">
-                    <thead class="table-dark">
+            <div class="table-responsive w-100 mt-4">
+                <table class="table table-bordered table-hover text-center shadow-lg rounded">
+                    <thead class="bg-primary text-white">
                         <tr>
-                            <th>Nome</th>
-                            <th>Descrizione</th>
-                            <th>Prezzo</th>
-                            <th>Allergeni</th>
-                            <th>Azioni</th>
+                            <th class="py-3">Nome Ingrediente</th>
+                            <th class="py-3">Azione</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr th:each="pizza : ${pizzas}">
-                            <td th:text="${pizza.getNome()}"></td>
-                            <td class="small" th:text="${pizza.getDescrizione()}"></td>
-                            <td class="small" th:text="${pizza.getPrezzo()} + '€'"></td>
-                            <td class="small">
-                                <div class="text-center">
-                                    <h6>Allergeni</h6>
-                                    <div th:insert="~{fragments/allergeni :: allergeni(
-                                        ${pizza.isFrutta_a_guscio()},
-                                        ${pizza.isPesce_e_crostacei()},
-                                        ${pizza.isGlutine()},
-                                        ${pizza.isLattosio()},
-                                        ${pizza.isSedano()},
-                                        ${pizza.isSesamo()},
-                                        ${pizza.isSoia()},
-                                        ${pizza.isUova()}
-                                    )}"></div>
-                                </div>
-                            </td>
+                    <tbody class="bg-light">
+                        <tr th:each="ingrediente : ${ingredienti}">
+                            <td th:text="${ingrediente.getNome()}"></td>
                             <td>
-                                <div class="d-flex gap-2">
-                                    <div th:insert="~{fragments/fragments :: buttons('/pizza', ${pizza.getNome()})}"></div>
-                                    <div th:insert="~{fragments/fragments :: buttonEdit('/edit/' + ${pizza.getId()})}"></div>
-
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        th:data-bs-target="'#delete-modal-' + ${pizza.getId()}">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        th:data-bs-target="'#delete-modal-' + ${ingrediente.getId()}">
                                         Delete
                                     </button>
-
-                                    <div class="modal fade" th:id="'delete-modal-' + ${pizza.getId()}" tabindex="-1">
+                                
+                                    <div class="modal fade" th:id="'delete-modal-' + ${ingrediente.getId()}" tabindex="-1">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -71,22 +48,22 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>Sei sicuro di voler cancellare la pizza: 
-                                                        <strong th:text="${pizza.getNome()}"></strong>?
+                                                    <p>Sei sicuro di voler cancellare l'ingrediente: 
+                                                        <strong th:text="${ingrediente.getNome()}"></strong>?
                                                     </p>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                         Annulla
                                                     </button>
-                                                    <form th:action="@{/delete/{id}(id=${pizza.getId()})}" method="post">
+                                                    <form th:action="@{/cancella_ingrediente/{id}(id=${ingrediente.getId()})}" method="post">
                                                         <button type="submit" class="btn btn-danger">Elimina</button>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                <!-- Fine Modale -->
                             </td>
                         </tr>
                     </tbody>
@@ -95,6 +72,10 @@
         </div>
     </div>
 </th:block>
+
+
+
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 </body>
 

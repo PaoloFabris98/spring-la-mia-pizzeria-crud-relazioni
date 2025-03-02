@@ -17,3 +17,6 @@ h5 {
 #card .card:hover {
   background-color: yellow;
 }
+.table-responsive {
+  width: 100%;
+}

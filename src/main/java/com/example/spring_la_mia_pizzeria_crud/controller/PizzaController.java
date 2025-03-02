@@ -1,5 +1,6 @@
 package com.example.spring_la_mia_pizzeria_crud.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,14 +14,23 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
+import com.example.spring_la_mia_pizzeria_crud.model.Ingrediente;
 import com.example.spring_la_mia_pizzeria_crud.model.Pizza;
+import com.example.spring_la_mia_pizzeria_crud.model.SpecialOffers;
+import com.example.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
+import com.example.spring_la_mia_pizzeria_crud.service.IngredientiService;
 import com.example.spring_la_mia_pizzeria_crud.service.PizzaService;
+import com.example.spring_la_mia_pizzeria_crud.service.SpecialOffersService;
 
 @Controller
 public class PizzaController {
 
     @Autowired
     private PizzaService pizzaService;
+    @Autowired
+    SpecialOffersService specialOffersService;
+    @Autowired
+    IngredientiService ingredientiService;
 
     @GetMapping("/pizza")
     public String seePizza(@RequestParam(name = "query") String query, Model model, HttpServletRequest request) {
@@ -33,7 +43,7 @@ public class PizzaController {
             model.addAttribute("pizzas", pizza);
         }
 
-        return "pizza";
+        return "pizza/pizza";
     }
 
     @GetMapping("/searchPizza")
@@ -44,24 +54,41 @@ public class PizzaController {
         } else {
             model.addAttribute("currentURI", request.getRequestURI());
             model.addAttribute("pizzas", pizze);
-            return "pizza";
+            return "pizza/pizza";
         }
     }
 
     @GetMapping("/creaPizza")
     public String addPizza(Model model) {
+        List<Ingrediente> ingredienti = ingredientiService.findAll();
         model.addAttribute("pizza", new Pizza());
-        return "addPizza";
+        model.addAttribute("ingredienti", ingredienti);
+
+        return "pizza/addPizza";
+    }
+
+    @GetMapping("/creaOfferta/{id}")
+    public String addOfferta(@PathVariable Integer id, Model model) {
+        SpecialOffers offerta = new SpecialOffers();
+
+        offerta.setPizza(pizzaService.findById(id).get());
+        offerta.setDiscountStart(LocalDate.now());
+
+        model.addAttribute("offerta", offerta);
+
+        return "offerta/offerta";
     }
 
     @PostMapping("/creaPizza")
     public String addPizza(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult,
+            @RequestParam(value = "ingredienti", required = false) List<String> ingredientiNomi,
             RedirectAttributes redirectAttributes) {
+
         if (bindingResult.hasErrors()) {
-            return "addPizza";
+            return "pizza/addPizza";
         }
 
-        pizzaService.save(formPizza);
+        pizzaService.aggiungiPizza(formPizza, ingredientiNomi);
 
         redirectAttributes.addFlashAttribute("message", "La tua pizza è stata creata");
         redirectAttributes.addFlashAttribute("messageClass", "alert-success");
@@ -74,7 +101,7 @@ public class PizzaController {
         Optional<Pizza> pizza = pizzaService.findById(id);
         if (pizza.isPresent()) {
             model.addAttribute("pizza", pizza.get());
-            return "editPizza";
+            return "pizza/editPizza";
         } else {
             return "redirect:/";
         }
@@ -84,7 +111,7 @@ public class PizzaController {
     public String editPizza(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult,
             RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            return "editPizza";
+            return "pizza/editPizza";
         }
 
         pizzaService.save(formPizza);
