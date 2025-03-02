@@ -81,14 +81,13 @@ public class PizzaController {
 
     @PostMapping("/creaPizza")
     public String addPizza(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult,
-            @RequestParam(value = "ingredienti", required = false) List<String> ingredientiNomi,
             RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             return "pizza/addPizza";
         }
 
-        pizzaService.aggiungiPizza(formPizza, ingredientiNomi);
+        pizzaService.save(formPizza);
 
         redirectAttributes.addFlashAttribute("message", "La tua pizza è stata creata");
         redirectAttributes.addFlashAttribute("messageClass", "alert-success");
@@ -99,7 +98,9 @@ public class PizzaController {
     @GetMapping("/edit/{id}")
     public String editPizza(@PathVariable Integer id, Model model) {
         Optional<Pizza> pizza = pizzaService.findById(id);
+        List<Ingrediente> ingredienti = ingredientiService.findAll();
         if (pizza.isPresent()) {
+            model.addAttribute("ingredienti", ingredienti);
             model.addAttribute("pizza", pizza.get());
             return "pizza/editPizza";
         } else {

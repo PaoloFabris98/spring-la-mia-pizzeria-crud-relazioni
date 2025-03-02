@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class IngredientiController {
 
     @Autowired
-    IngredientiService ingredientiService;
+    private IngredientiService ingredientiService;
 
     @GetMapping("/creaIngrediente")
     public String addIngrediente(Model model) {

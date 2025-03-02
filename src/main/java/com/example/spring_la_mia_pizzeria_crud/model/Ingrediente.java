@@ -31,6 +31,9 @@ public class Ingrediente {
     @NotEmpty
     private String nome;
 
+    @NotEmpty
+    private String tipo;
+
     @ManyToMany(mappedBy = "ingredienti")
     private List<Pizza> pizze;
 
@@ -65,4 +68,8 @@ public class Ingrediente {
         this.pizze = pizze;
     }
 
+    @Override
+    public String toString() {
+        return this.nome;
+    }
 }

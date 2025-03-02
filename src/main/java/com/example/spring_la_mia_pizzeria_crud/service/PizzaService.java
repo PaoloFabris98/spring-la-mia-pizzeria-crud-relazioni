@@ -20,18 +20,6 @@ public class PizzaService {
     @Autowired
     private IngredientiRepository ingredienteRepository;
 
-    @Transactional
-    public void aggiungiPizza(Pizza pizza, List<String> ingredientiNomi) {
-        List<Ingrediente> ingredienti = ingredienteRepository.findByNomeIn(ingredientiNomi);
-
-        if (ingredienti.size() != ingredientiNomi.size()) {
-            throw new IllegalArgumentException("Uno o più ingredienti non esistono nel database.");
-        }
-
-        pizza.setIngredienti(ingredienti);
-        pizzaRepository.save(pizza);
-    }
-
     public List<Pizza> findAll() {
         return pizzaRepository.findAll();
     }
